@@ -1,0 +1,4 @@
+    <vTypeDistribution id="typedist1" >
+        <vType id="vTypeCar" maxSpeed="35" vClass="passenger" length="4.5" guiShape="passenger" probability="0.9"/>
+        <vType id="vTypeBus" maxSpeed="25" vClass="bus" Length="12.63" guiShape="bus" probability="0.1"/>
+    </vTypeDistribution>
