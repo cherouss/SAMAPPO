@@ -249,8 +249,8 @@ in_layer = 120
 
 
 
-envs = SumoEnvironment(net_file='12inter/12inter.net.xml',
-              route_file='12inter/rou.rou.xml',
+envs = SumoEnvironment(net_file='data/6intersections/nromal/6inter.net.xml',
+              route_file='data/6intersections/nromal/rou.rou.xml',
               use_gui=False,sumo_seed = seed,
              min_green = 4, max_green=60,delta_time = 4,begin_time = 0,
               num_seconds=3600, reward_fn="my_reward")
