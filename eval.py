@@ -129,8 +129,8 @@ if 1 :
     # env setup
     num_steps = 3600
     in_layer = 120
-    envs = SumoEnvironment(net_file=f'12inter{ver}/12inter.net.xml',
-                  route_file=f'12inter{ver}/rou.rou.xml',sumo_seed = seed,
+    envs = SumoEnvironment(net_file=f'data/6intersections/normal/6inter.net.xml',
+                  route_file=f'data/6intersections/normal/rou.rou.xml',sumo_seed = seed,
                   use_gui=True,
                  min_green = 4, max_green=60,delta_time = 4, output_file =xml_name,
                   num_seconds=3600, reward_fn="my_reward")
