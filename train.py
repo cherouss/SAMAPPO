@@ -25,14 +25,6 @@ global_state_dim = (state_dim * num_agents) + num_agents
 class Model(nn.Module):
     def __init__(self, envs, in_layer = 64):
         super().__init__()
-        """
-        self.network = nn.Sequential(
-            layer_init(nn.Linear(np.array(envs.observation_space.shape).prod(), in_layer)),
-            nn.Tanh(),
-            layer_init(nn.Linear(in_layer, in_layer)),
-            nn.Tanh(),
-        )"""
-        
         
         self.critic = nn.Sequential(
             layer_init(nn.Linear(global_state_dim, in_layer)),
@@ -73,7 +65,7 @@ def run():
     track = False
     name = f'SA_PPO_SUMO{run_name}'
 
-    writer = SummaryWriter(f"runs/SA6_{name}")
+    writer = SummaryWriter(f"SA6_{name}")
     
     
 
@@ -95,10 +87,10 @@ def run():
                   route_file='data/6intersections/normal/rou.rou.xml',
                   use_gui=False,
                  min_green = 4, max_green=60,delta_time = 4,
-                  num_seconds=3600, reward_fn="my_reward")
+                  num_seconds=3600, reward_fn="custom_reward")
 
     SAMAPPO = Model(envs,in_layer).to(device)
-    learning_rate = 1e-4# good results were acheived with 1e-3lr with no rewards normalisation
+    learning_rate = 1e-4
     update_epochs = 20
     optimizer = optim.Adam(SAMAPPO.parameters(), lr=learning_rate, eps=1e-5)
     #assert isinstance(envs.action_space, gym.spaces.Discrete), "only discrete action space is supported"
