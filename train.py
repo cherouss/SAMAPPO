@@ -8,7 +8,6 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.distributions.categorical import Categorical
-from torch.utils.tensorboard import SummaryWriter
 import os
 
 def layer_init(layer, std=np.sqrt(2), bias_const=0.0):
@@ -65,7 +64,6 @@ def run():
     track = False
     name = f'SA_PPO_SUMO{run_name}'
 
-    writer = SummaryWriter(f"SA6_{name}")
     
     
 
@@ -85,12 +83,12 @@ def run():
     in_layer = 120
     envs = SumoEnvironment(net_file='data/6intersections/normal/6inter.net.xml',
                   route_file='data/6intersections/normal/rou.rou.xml',
-                  use_gui=True,
+                  use_gui=False,
                  min_green = 4, max_green=60,delta_time = 4,
                   num_seconds=3600, reward_fn="custom_reward")
 
     SAMAPPO = Model(envs,in_layer).to(device)
-    learning_rate = 1e-4
+    learning_rate = 1e-5
     update_epochs = 20
     optimizer = optim.Adam(SAMAPPO.parameters(), lr=learning_rate, eps=1e-5)
     #assert isinstance(envs.action_space, gym.spaces.Discrete), "only discrete action space is supported"
@@ -312,20 +310,6 @@ def run():
 
 
 
-        writer.add_scalar("charts/learning_rate", optimizer.param_groups[0]["lr"], global_step)
-        writer.add_scalar("losses/value_loss", v_loss.item(), global_step)
-        writer.add_scalar("losses/policy_loss", pg_loss.item(), global_step)
-        writer.add_scalar("losses/entropy", entropy_loss.item(), global_step)
-        writer.add_scalar("losses/old_approx_kl", old_approx_kl.item(), global_step)
-        writer.add_scalar("losses/approx_kl", approx_kl.item(), global_step)
-        writer.add_scalar("losses/clipfrac", np.mean(clipfracs), global_step)
-        writer.add_scalar("losses/explained_variance", explained_var, global_step)
-        writer.add_scalar("charts/SPS", int(global_step / (time.time() - start_time)), global_step)
-        writer.add_scalar("rewards/reward",rewards.mean().item(), global_step)
-        writer.add_scalar("rewards/waiting_time",mean_waiting_time/900, global_step)
-        writer.add_scalar("rewards/agent_waiting_time",agent_waiting_time, global_step)
-        mean_waiting_time =0
-        agent_waiting_time =0
+      
         envs.close()
-    writer.close()
 run()
