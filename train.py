@@ -85,7 +85,7 @@ def run():
     in_layer = 120
     envs = SumoEnvironment(net_file='data/6intersections/normal/6inter.net.xml',
                   route_file='data/6intersections/normal/rou.rou.xml',
-                  use_gui=False,
+                  use_gui=True,
                  min_green = 4, max_green=60,delta_time = 4,
                   num_seconds=3600, reward_fn="custom_reward")
 
