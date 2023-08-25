@@ -19,7 +19,7 @@ state_dim = 10 + num_agents
 action_dim = 2
 global_state_dim = (state_dim * num_agents) + num_agents 
 
-
+#the model is based  on cleanrl implementation: https://docs.cleanrl.dev/rl-algorithms/ppo/
     
 class Model(nn.Module):
     def __init__(self, envs, in_layer = 64):
@@ -83,7 +83,7 @@ def run():
     in_layer = 120
     envs = SumoEnvironment(net_file='data/6intersections/normal/6inter.net.xml',
                   route_file='data/6intersections/normal/rou.rou.xml',
-                  use_gui=False,
+                  use_gui=True,
                  min_green = 4, max_green=60,delta_time = 4,
                   num_seconds=3600, reward_fn="custom_reward")
 
@@ -129,7 +129,7 @@ def run():
     anneal_lr = True
     start_time = time.time()
     total_timesteps = 20000
-    gamma= 0.95
+    gamma= 0.9
     gae_lambda = 0.9 
  
     num_updates = total_timesteps #// batch_size
