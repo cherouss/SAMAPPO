@@ -209,6 +209,7 @@ def run():
                 infos2 = info
                 print(infos2)
                 break
+        up = 0
         with torch.no_grad():
                 next_value = SAMAPPO.get_value(global_ob)
                 advantages = torch.zeros_like(rewards).to(device)
