@@ -413,8 +413,7 @@ class TrafficSignal:
         "average-speed": _average_speed_reward,
         "queue": _queue_reward,
         "pressure": _pressure_reward,
-        "custom_fn":_pressure_waiting_reward,
-        "my_reward":  my_reward
+        "custom_reward":  my_reward
     }
 
     
