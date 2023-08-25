@@ -133,7 +133,7 @@ if 1 :
                   route_file=f'data/6intersections/normal/rou.rou.xml',sumo_seed = seed,
                   use_gui=True,
                  min_green = 4, max_green=60,delta_time = 4, output_file =xml_name,
-                  num_seconds=3600, reward_fn="my_reward")
+                  num_seconds=3600, reward_fn="custom_reward")
     in_layer = 120
     k = 0
  
