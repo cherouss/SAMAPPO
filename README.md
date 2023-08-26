@@ -1,2 +1,2 @@
 # SAMAPPO
-a SAMAPPO for Proximal Policy Optimisation for Traffic lights control
+a SAMAPPO for  Traffic lights control
