@@ -39,11 +39,10 @@ class Model(nn.Module):
             nn.Tanh(),
             layer_init(nn.Linear(in_layer, envs.action_space.n), std=0.01),
         )
-        self.multihead_attention = nn.MultiheadAttention(state_dim, 2)
         #self.norm1 = nn.LayerNorm(state_dim)
-        self.multihead_attention2 = nn.TransformerEncoderLayer(d_model=state_dim, nhead=2,dim_feedforward = 128,dropout = 0.1, batch_first  = True )
+        self.multihead_attention = nn.TransformerEncoderLayer(d_model=state_dim, nhead=2,dim_feedforward = 128,dropout = 0.1, batch_first  = True )
     def get_states(self, x):
-        out = self.multihead_attention2(x)
+        out = self.multihead_attention(x)
         return out
 
     def get_value(self, x):
