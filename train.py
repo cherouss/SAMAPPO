@@ -149,7 +149,6 @@ def run():
         next_obs = torch.zeros((num_agents,state_dim)).to(device)
         next_done = torch.zeros((1)).to(device)
         envs.reset()
-        print(envs.ts_ids)
         for tls in envs.ts_ids:
             actss[tls] = torch.zeros_like(actions2).to(device)
             probss[tls] = torch.zeros_like(logprobs2).to(device)
@@ -204,8 +203,6 @@ def run():
             up+=1
             
             if up == update_freq:
-                infos2 = info
-                print(infos2)
                 break
         up = 0
         with torch.no_grad():
